@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>prova_bootstrap-vue</title>
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css"/>
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+    <script src="/dist/build.js"></script>
+    <div class="container">
+      <h2 class="text-center text-primary">Come funziona Bootstrap-vue?</h2>
+      </br>
+      <h3>
+        Input v-model
+      </h3>
+      <p>
+        <div class="row">
+          <div class="col-9">
+            <h4 class = "text-secondary">
+              Inserisci il tuo nome:
+            </h4>
+          </div>
+          <div class="col">
+              <div class="input-group mb-3">
+                <input type="text" v-model="nome">
+              </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-9">
+              <h4 class="text-danger">
+                  {{ nome }}
+              </h4>
+          </div>
+          <div class="col">
+            <button v-on:click="inverti" type="button" class="btn btn-secondary">Inverti</button>
+          </div>
+        </div>
+      </p>
+      </br>
+      <h3>
+        Alert
+      </h3>
+      <p>
+        <div class="row">
+          <div class="col-9">
+            <h4 class = "text-secondary">
+              <h4>
+                  Quanto fa {{ n1 }} * {{ n2 }}?
+              </h4>
+            </h4>
+          </div>
+          <div class="col">
+            <div class="input-group mb-3">
+              <input type="text" v-model="risultato">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-9">
+              <div class="alert" :style= "stileAlert" role="alert">
+                  <h4 class="alert-heading">{{ mess }}</h4>
+              </div>
+          </div>
+          <div class="col">
+            <button v-on:click="verifica" type="button" class="btn btn-secondary">Verifica</button>
+          </div>
+        </div>
+      </p>
+    </div>
+  </div>
+
+    <script>
+      var app = new Vue({
+            el: '#app',
+            data: {
+                nome: '',
+                n1: parseInt(Math.random() * 10),
+                n2: parseInt(Math.random() * 10),
+                risultato: 0,
+                stileAlert: {
+                  backgroundColor: "#ffffff" 
+                },
+                mess: "",
+                text1: "Ben fatto!",
+                text2: "Hai sbagliato"
+            },
+
+            methods: {
+              inverti: function(){
+                this.nome = this.nome.split('').reverse().join('')
+              },
+              verifica: function(){
+                if(this.n1 * this.n2 == this.risultato){
+                  this.stileAlert= {
+                    backgroundColor: "#00ff00" 
+                  }
+                  this.mess = this.text1
+                }
+                else{
+                  this.stileAlert= {
+                    backgroundColor: "#ff0000" 
+                  }
+                  this.mess = this.text2
+                }
+              }
+            }
+      })
+    </script>
+    <style>
+      h3{
+          text-align:center;
+          background-color: rgb(230, 167, 50);
+        }
+    </style>
+  </body>
+</html>
